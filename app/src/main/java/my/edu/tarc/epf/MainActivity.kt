@@ -34,11 +34,22 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_dividend, R.id.nav_investment
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_dividend, R.id.nav_investment
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener {
+            _, destination, _ ->
+            if (destination.id == R.id.nav_about) {
+                binding.appBarMain.toolbar.menu.findItem(R.id.action_about).isVisible = false
+                binding.appBarMain.toolbar.menu.findItem(R.id.action_settings).isVisible = false
+            } else {
+//                binding.appBarMain.toolbar.menu.findItem(R.id.action_about).isVisible = true
+//                binding.appBarMain.toolbar.menu.findItem(R.id.action_settings).isVisible = true
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -55,6 +66,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.action_settings){
             Snackbar.make(findViewById(R.id.nav_host_fragment_content_main), R.string.action_settings, Snackbar.LENGTH_SHORT).show()
+        }
+        else if(item.itemId == R.id.action_about) {
+            findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.nav_about)
         }
         return super.onOptionsItemSelected(item)
     }
