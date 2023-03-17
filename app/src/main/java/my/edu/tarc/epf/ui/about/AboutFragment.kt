@@ -43,6 +43,11 @@ class AboutFragment : Fragment() {
             intent.setData(Uri.parse("tel:0389226000"))
             startActivity(intent)
         }
+        binding.buttonLocate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setData(Uri.parse("https://www.google.com/maps/search/epf/@3.2178158,101.6921608,13z/data=!3m1!4b1?authuser=0"))
+            startActivity(intent)
+        }
         binding.buttonWeb.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.setData(Uri.parse("https://www.kwsp.gov.my"))
