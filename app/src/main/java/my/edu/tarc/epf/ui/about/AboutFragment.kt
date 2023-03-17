@@ -45,7 +45,7 @@ class AboutFragment : Fragment() {
         }
         binding.buttonWeb.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse("www.kwsp.gov.my"))
+            intent.setData(Uri.parse("https://www.kwsp.gov.my"))
             startActivity(intent)
         }
     }
