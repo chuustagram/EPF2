@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KWSP</string>
+    <string name="action_settings">Tetapan</string>
+    <string name="action_about">Tentang</string>
+    <string name="menu_home">Rumah</string>
+    <string name="menu_dividend">Dividen</string>
+    <string name="menu_investment">Pelaburan</string>
+    <string name="dividend_2022">Dividen 2022</string>
+    <string name="year">Tahun</string>
+    <string name="age">Umur</string>
+    <string name="error">Diperlukan</string>
+    <string name="version">Versi</string>
+    <string name="calculate">Kira</string>
+    <string name="dob">Tarikh Lahir</string>
+    <string name="reset">Set Semula</string>
+    <string name="locate_us">Lokasi Kita</string>
+    <string name="cancel">Batal</string>
+    <string name="exit">Keluar</string>
+</resources>

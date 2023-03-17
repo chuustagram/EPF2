@@ -1,8 +1,11 @@
 package my.edu.tarc.epf
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import my.edu.tarc.epf.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -45,12 +49,17 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.nav_about) {
                 binding.appBarMain.toolbar.menu.findItem(R.id.action_about).isVisible = false
                 binding.appBarMain.toolbar.menu.findItem(R.id.action_settings).isVisible = false
-            } else {
-//                binding.appBarMain.toolbar.menu.findItem(R.id.action_about).isVisible = true
-//                binding.appBarMain.toolbar.menu.findItem(R.id.action_settings).isVisible = true
             }
         }
-    }
+        // Handle Back Press Event
+        val backPressCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val exitDialogFragment = ExitDialogFragment()
+                exitDialogFragment.show(supportFragmentManager, "ExitDialog")
+            }
+        }
+        onBackPressedDispatcher.addCallback(backPressCallback)
+    } // End of onCreate method
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -72,4 +81,20 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-}
+
+    class ExitDialogFragment: DialogFragment() {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setMessage(getString(R.string.exit_message))
+                .setPositiveButton(getString(R.string.exit), {
+                    dialog, id ->
+                    requireActivity().finish() // Terminate the app
+                })
+                .setNegativeButton(getString(R.string.cancel), {
+                    _, _ ->
+                    // Do nothing
+                })
+            return builder.create()
+        }
+    } // End of Exit Dialog Fragment
+} // End of Main Activity
